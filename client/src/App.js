@@ -15,7 +15,7 @@ import TweetDetails from "./components/TweetDetails";
 import Profile from "./components/Profile";
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap'); */
 
 /* CSS RESET*/
 html, body, div, span, applet, object, iframe,
@@ -70,6 +70,7 @@ table {
 function App() {
   return (
     <Router>
+      <GlobalStyle />
       <Switch>
         <Route path="/">
           <Home />
