@@ -57,14 +57,13 @@ table {
 }
 *{
   font-family: 'Manrope', sans-serif;
+  box-sizing: border-box
 }
 
 `;
 
 function App() {
   const { currentUser, status } = React.useContext(CurrentUserContext);
-  console.log(currentUser);
-  console.log(status);
 
   return (
     <Router>
@@ -83,7 +82,7 @@ function App() {
           <Profile currentUser={currentUser} status={status} />
         </Route>
         <Route path="/">
-          <Home />
+          <Home currentUser={currentUser} status={status} />
         </Route>
       </Switch>
     </Router>
