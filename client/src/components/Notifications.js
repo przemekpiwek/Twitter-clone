@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
 import { COLORS } from "../constants";
@@ -12,12 +13,14 @@ const Notifications = () => {
         <div style={{ flex: 1 }}>
           <TweetHeader>
             <span style={{ display: "flex" }}>
-              <FiArrowLeft
-                style={{
-                  color: `${COLORS.primary}`,
-                  marginRight: "20px",
-                }}
-              />
+              <Link to="/">
+                <FiArrowLeft
+                  style={{
+                    color: `${COLORS.primary}`,
+                    marginRight: "20px",
+                  }}
+                />
+              </Link>
               Notifications
             </span>
           </TweetHeader>

@@ -12,7 +12,7 @@ function Sidebar() {
     <SidebarDiv>
       <Catlogo
         src={catLogo}
-        style={{ width: "35px", height: "35px", padding: "10px" }}
+        style={{ width: "50px", height: "50px", padding: "10px" }}
       />
       <SidebarLink to="/">
         <span>
@@ -46,13 +46,20 @@ export default Sidebar;
 
 const SidebarDiv = styled.div`
   margin: 0;
-  padding: 0;
   width: 275px;
   height: 100vh;
-  padding: 0 10px;
+  padding: 10px;
   border: 1px solid rgb(230, 236, 240);
 `;
-const Catlogo = styled.img``;
+const Catlogo = styled.img`
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-bottom: 20px;
+
+  &:hover {
+    background: ${COLORS.secondary};
+  }
+`;
 const SidebarLink = styled(NavLink)`
   display: flex;
   text-decoration: none;

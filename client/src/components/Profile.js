@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
 import { COLORS } from "../constants";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiMapPin, FiCalendar } from "react-icons/fi";
 
 const Profile = ({ currentUser, status }) => {
   return (
@@ -12,12 +13,14 @@ const Profile = ({ currentUser, status }) => {
         <div style={{ flex: 1 }}>
           <TweetHeader>
             <span style={{ display: "flex" }}>
-              <FiArrowLeft
-                style={{
-                  color: `${COLORS.primary}`,
-                  marginRight: "20px",
-                }}
-              />
+              <Link to="/">
+                <FiArrowLeft
+                  style={{
+                    color: `${COLORS.primary}`,
+                    marginRight: "20px",
+                  }}
+                />
+              </Link>
               Profile
             </span>
           </TweetHeader>
@@ -50,12 +53,32 @@ const Profile = ({ currentUser, status }) => {
                     <span style={{ color: `${COLORS.secondaryFont}` }}>
                       {`@${currentUser.profile.handle}`}
                     </span>
-                    <p style={{ fontSize: "15px", lineHeight: "19.7px" }}>
+                    <p
+                      style={{
+                        fontSize: "15px",
+                        lineHeight: "19.7px",
+                        marginTop: "20px",
+                        marginBottom: "15px",
+                      }}
+                    >
                       {currentUser.profile.bio}
                     </p>
-                    <div>
-                      <span>{currentUser.profile.location}</span>
-                      <span>{currentUser.profile.joined}</span>
+                    <div style={{ display: "flex" }}>
+                      <span
+                        style={{
+                          color: `${COLORS.secondaryFont}`,
+                          display: "flex",
+                          alignItems: "center",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <FiMapPin style={{ marginRight: "5px" }} />
+                        {currentUser.profile.location}
+                      </span>
+                      <span style={{ color: `${COLORS.secondaryFont}` }}>
+                        <FiCalendar style={{ marginRight: "5px" }} />
+                        {currentUser.profile.joined}
+                      </span>
                     </div>
                     <div>
                       <span>
@@ -71,6 +94,11 @@ const Profile = ({ currentUser, status }) => {
                         </span>
                       </span>
                     </div>
+                    <TabBar>
+                      <Tab>Tweets</Tab>
+                      <Tab>Media</Tab>
+                      <Tab>Likes</Tab>
+                    </TabBar>
                   </ProfileInfo>
                 </ProfDiv>
               </>
@@ -121,6 +149,7 @@ const ProfilePic = styled.img`
 
 const ProfDiv = styled.div`
   position: relative;
+  border-bottom: 1px solid rgb(230, 236, 240);
 
   &::after {
     content: "";
@@ -156,4 +185,12 @@ const FollowButton = styled.button`
     cursor: pointer;
     background: ${COLORS.secondary};
   }
+`;
+
+const TabBar = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;
+const Tab = styled.div`
+  flex-grow: 1;
 `;
