@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Link,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-
 import Home from "./components/Home";
 import Notifications from "./components/Notifications";
 import Bookmarks from "./components/Bookmarks";
 import TweetDetails from "./components/TweetDetails";
 import Profile from "./components/Profile";
+import { CurrentUserContext } from "./components/CurrentUserContext";
 
 const GlobalStyle = createGlobalStyle`
 /* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap'); */
@@ -68,13 +62,14 @@ table {
 `;
 
 function App() {
+  const { currentUser, status } = React.useContext(CurrentUserContext);
+  console.log(currentUser);
+  console.log(status);
+
   return (
     <Router>
       <GlobalStyle />
       <Switch>
-        <Route path="/">
-          <Home />
-        </Route>
         <Route path="/notifications">
           <Notifications />
         </Route>
@@ -84,8 +79,11 @@ function App() {
         <Route path="/tweet/:tweetId">
           <TweetDetails />
         </Route>
-        <Route path="/profileId">
-          <Profile />
+        <Route path="/profile">
+          <Profile currentUser={currentUser} status={status} />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </Router>

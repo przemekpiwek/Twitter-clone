@@ -50,6 +50,7 @@ const SidebarDiv = styled.div`
   width: 275px;
   height: 100vh;
   padding: 0 10px;
+  border: 1px solid rgb(230, 236, 240);
 `;
 const Catlogo = styled.img``;
 const SidebarLink = styled(NavLink)`
@@ -66,6 +67,7 @@ const SidebarLink = styled(NavLink)`
   &:hover > span {
     background: ${COLORS.secondary};
     cursor: pointer;
+    color: ${COLORS.primary};
   }
   &.active {
     color: ${COLORS.primary};

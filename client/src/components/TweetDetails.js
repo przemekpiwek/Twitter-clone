@@ -1,7 +1,13 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 
 const TweetDetails = () => {
-  return <div>TweetDetails</div>;
+  return (
+    <>
+      <Sidebar />
+      <div>TweetDetails</div>
+    </>
+  );
 };
 
 export default TweetDetails;

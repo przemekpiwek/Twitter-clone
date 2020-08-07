@@ -1,7 +1,14 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 
 const Bookmarks = () => {
-  return <div>Bookmark</div>;
+  return (
+    <>
+      <Sidebar />
+      <div>Bookmark</div>
+    </>
+  );
+  return;
 };
 
 export default Bookmarks;
