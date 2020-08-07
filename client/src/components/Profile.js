@@ -99,7 +99,7 @@ const TweetHeader = styled.div`
 `;
 
 const BannerDiv = styled.div`
-  height: 33.3vh;
+  height: 30vh;
   position: relative;
 `;
 

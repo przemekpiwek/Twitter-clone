@@ -9,7 +9,6 @@ import Profile from "./components/Profile";
 import { CurrentUserContext } from "./components/CurrentUserContext";
 
 const GlobalStyle = createGlobalStyle`
-/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap'); */
 
 /* CSS RESET*/
 html, body, div, span, applet, object, iframe,
@@ -56,8 +55,10 @@ table {
 	border-spacing: 0;
 }
 *{
-  font-family: 'Manrope', sans-serif;
-  box-sizing: border-box
+  box-sizing: border-box;
+}
+body{
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 `;
