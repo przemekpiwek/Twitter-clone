@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants";
 
 const Home = ({ currentUser, status }) => {
+  const [CharacterCount, SetCharacterCount] = React.useState("280");
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -15,11 +16,30 @@ const Home = ({ currentUser, status }) => {
               <>
                 <div style={{ display: "flex" }}>
                   <ProfilePic src={currentUser.profile.avatarSrc} />
-                  <TextArea placeholder="What's Happening?" />
+                  <TextArea
+                    placeholder="What's Happening?"
+                    onKeyDown={(e) => {
+                      SetCharacterCount(
+                        Number(280) - Number(`${e.target.value.length}`)
+                      ); //getting a string, need a num
+                    }}
+                  />
                 </div>
                 <div style={{ display: "flex" }}>
                   <SocialBar />
-                  <TweetButton>Meow</TweetButton>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <CharacterCounter>{CharacterCount}</CharacterCounter>
+                    <TweetButton
+                      style={{
+                        background:
+                          CharacterCount < 280
+                            ? `${COLORS.primary}`
+                            : `${COLORS.secondary}`,
+                      }}
+                    >
+                      Meow
+                    </TweetButton>
+                  </div>
                 </div>
               </>
             )}
@@ -32,6 +52,12 @@ const Home = ({ currentUser, status }) => {
 };
 
 export default Home;
+
+const CharacterCounter = styled.p`
+  font-size: 0.8em;
+  margin-right: 10px;
+  color: ${COLORS.secondaryFont};
+`;
 
 const TweetHeader = styled.div`
   height: 53px;

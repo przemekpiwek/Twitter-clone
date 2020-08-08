@@ -14,12 +14,7 @@ const Notifications = () => {
           <TweetHeader>
             <span style={{ display: "flex" }}>
               <Link to="/">
-                <FiArrowLeft
-                  style={{
-                    color: `${COLORS.primary}`,
-                    marginRight: "20px",
-                  }}
-                />
+                <ArrowIcon />
               </Link>
               Notifications
             </span>
@@ -31,6 +26,11 @@ const Notifications = () => {
 };
 
 export default Notifications;
+
+const ArrowIcon = styled(FiArrowLeft)`
+  color: ${COLORS.primary};
+  margin-right: "20px";
+`;
 
 const TweetHeader = styled.div`
   height: 53px;

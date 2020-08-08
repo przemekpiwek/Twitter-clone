@@ -10,36 +10,35 @@ const Profile = ({ currentUser, status }) => {
     <>
       <div style={{ display: "flex" }}>
         <Sidebar />
-        <div style={{ flex: 1 }}>
-          <TweetHeader>
-            <span style={{ display: "flex" }}>
-              <Link to="/">
-                <FiArrowLeft
-                  style={{
-                    color: `${COLORS.primary}`,
-                    marginRight: "20px",
-                  }}
-                />
-              </Link>
-              Profile
-            </span>
-          </TweetHeader>
-          <BannerDiv>
+        <div
+          style={{
+            flex: 1,
+          }}
+        >
+          <div
+            style={{
+              borderBottom: "1px solid rgb(230, 236, 240)",
+            }}
+          >
+            <TweetHeader>
+              <span style={{ display: "flex" }}>
+                <Link to="/">
+                  <ArrowIcon />
+                </Link>
+                Profile
+              </span>
+            </TweetHeader>
             {currentUser && (
               <>
-                <Banner src={currentUser.profile.bannerSrc} />
+                <BannerDiv>
+                  <Banner src={currentUser.profile.bannerSrc} />
+                </BannerDiv>
                 <ProfDiv>
                   <ProfilePic src={currentUser.profile.avatarSrc} />
                   <ProfileInfo>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        paddingBottom: "30px",
-                      }}
-                    >
+                    <FollowDiv>
                       <FollowButton>Follow</FollowButton>
-                    </div>
+                    </FollowDiv>
                     <div>
                       <span
                         style={{
@@ -50,60 +49,51 @@ const Profile = ({ currentUser, status }) => {
                         {currentUser.profile.displayName}
                       </span>
                     </div>
-                    <span style={{ color: `${COLORS.secondaryFont}` }}>
-                      {`@${currentUser.profile.handle}`}
-                    </span>
-                    <p
-                      style={{
-                        fontSize: "15px",
-                        lineHeight: "19.7px",
-                        marginTop: "20px",
-                        marginBottom: "15px",
-                      }}
-                    >
-                      {currentUser.profile.bio}
-                    </p>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ marginTop: "5px" }}>
                       <span
                         style={{
                           color: `${COLORS.secondaryFont}`,
-                          display: "flex",
-                          alignItems: "center",
-                          marginRight: "10px",
+                          marginTop: "20px",
                         }}
                       >
+                        {`@${currentUser.profile.handle}`}
+                      </span>
+                    </div>
+                    <BioParagraph>{currentUser.profile.bio}</BioParagraph>
+                    <div style={{ display: "flex" }}>
+                      <InfoSpan>
                         <FiMapPin style={{ marginRight: "5px" }} />
                         {currentUser.profile.location}
-                      </span>
-                      <span style={{ color: `${COLORS.secondaryFont}` }}>
+                      </InfoSpan>
+                      <InfoSpan>
                         <FiCalendar style={{ marginRight: "5px" }} />
                         {currentUser.profile.joined}
+                      </InfoSpan>
+                    </div>
+                    <div style={{ marginTop: "20px" }}>
+                      <span>
+                        <FollowNumSpan>
+                          {currentUser.profile.numFollowing}{" "}
+                        </FollowNumSpan>
+                        <FollowTextSpan>Following</FollowTextSpan>
+                      </span>
+                      <span>
+                        <FollowNumSpan>
+                          {currentUser.profile.numFollowers}{" "}
+                        </FollowNumSpan>
+                        <FollowTextSpan>Followers</FollowTextSpan>
                       </span>
                     </div>
-                    <div>
-                      <span>
-                        {currentUser.profile.numFollowing}{" "}
-                        <span style={{ color: `${COLORS.secondaryFont}` }}>
-                          Following
-                        </span>
-                      </span>
-                      <span>
-                        {currentUser.profile.numFollowers}{" "}
-                        <span style={{ color: `${COLORS.secondaryFont}` }}>
-                          Followers
-                        </span>
-                      </span>
-                    </div>
-                    <TabBar>
-                      <Tab>Tweets</Tab>
-                      <Tab>Media</Tab>
-                      <Tab>Likes</Tab>
-                    </TabBar>
                   </ProfileInfo>
+                  <TabBar>
+                    <Tab>Tweets</Tab>
+                    <Tab>Media</Tab>
+                    <Tab>Likes</Tab>
+                  </TabBar>
                 </ProfDiv>
               </>
             )}
-          </BannerDiv>
+          </div>
         </div>
       </div>
     </>
@@ -111,6 +101,41 @@ const Profile = ({ currentUser, status }) => {
 };
 
 export default Profile;
+
+const FollowDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 30px;
+`;
+
+const FollowTextSpan = styled.span`
+  color: ${COLORS.secondaryFont};
+  margin-right: 30px;
+  font-weight: 300;
+`;
+
+const FollowNumSpan = styled.span`
+  font-weight: 800;
+`;
+
+const InfoSpan = styled.span`
+  color: ${COLORS.secondaryFont};
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+`;
+
+const ArrowIcon = styled(FiArrowLeft)`
+  color: ${COLORS.primary};
+  margin-right: "20px";
+`;
+
+const BioParagraph = styled.p`
+  font-size: 15px;
+  line-height: 19.7px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+`;
 
 const TweetHeader = styled.div`
   height: 53px;
@@ -149,7 +174,6 @@ const ProfilePic = styled.img`
 
 const ProfDiv = styled.div`
   position: relative;
-  border-bottom: 1px solid rgb(230, 236, 240);
 
   &::after {
     content: "";
@@ -190,7 +214,16 @@ const FollowButton = styled.button`
 const TabBar = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  margin-top: 50px;
 `;
 const Tab = styled.div`
   flex-grow: 1;
+  text-align: center;
+  font-weight: 800;
+  color: ${COLORS.secondaryFont};
+  padding: 20px 0;
+
+  &:hover {
+    background: ${COLORS.secondary};
+  }
 `;
