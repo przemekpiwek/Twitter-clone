@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const BigTweet = () => {
-    return()
-}
+// const BigTweet = () => {
+//     return()
+// }
 
-export default BigTweet
+// export default BigTweet

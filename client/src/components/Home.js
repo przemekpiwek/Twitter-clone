@@ -21,15 +21,27 @@ const Home = ({ currentUser, status }) => {
                     onKeyDown={(e) => {
                       SetCharacterCount(
                         Number(280) - Number(`${e.target.value.length}`)
-                      ); //getting a string, need a num
+                      );
                     }}
                   />
                 </div>
                 <div style={{ display: "flex" }}>
                   <SocialBar />
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <CharacterCounter>{CharacterCount}</CharacterCounter>
+                    <CharacterCounter
+                      style={{
+                        color:
+                          CharacterCount > 55
+                            ? `${COLORS.secondaryFont}`
+                            : CharacterCount > 0
+                            ? "yellow"
+                            : "red",
+                      }}
+                    >
+                      {CharacterCount}
+                    </CharacterCounter>
                     <TweetButton
+                      disabled={CharacterCount < 0 ? true : false}
                       style={{
                         background:
                           CharacterCount < 280
@@ -56,7 +68,7 @@ export default Home;
 const CharacterCounter = styled.p`
   font-size: 0.8em;
   margin-right: 10px;
-  color: ${COLORS.secondaryFont};
+  /* color: ${COLORS.secondaryFont}; */
 `;
 
 const TweetHeader = styled.div`
@@ -111,4 +123,9 @@ const TweetButton = styled.button`
   color: white;
   font-weight: bold;
   background: ${COLORS.secondary};
+  cursor: pointer;
+
+  &:disabled {
+    background: ${COLORS.secondary} !important;
+  }
 `;

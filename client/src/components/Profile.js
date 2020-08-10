@@ -216,14 +216,22 @@ const TabBar = styled.div`
   flex-wrap: nowrap;
   margin-top: 50px;
 `;
-const Tab = styled.div`
+const Tab = styled.button`
   flex-grow: 1;
   text-align: center;
   font-weight: 800;
   color: ${COLORS.secondaryFont};
   padding: 20px 0;
+  background: white;
+  border: 0px;
 
-  &:hover {
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
     background: ${COLORS.secondary};
+    border-bottom: 2px solid ${COLORS.primary};
+    outline: none;
   }
 `;

@@ -1,7 +1,7 @@
-import SmallTweet from 'react'
+import SmallTweet from "react";
 
-const SmallTweet = ({image, name, handle, date}) => {
-    return()
-}
+// const SmallTweet = ({image, name, handle, date}) => {
+//     return()
+// }
 
-export default BigTweet
+// export default BigTweet
