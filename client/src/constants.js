@@ -3,6 +3,5 @@ export const COLORS = {
   primary: "hsl(258deg, 100%, 50%)",
   secondary: "#EEE8FF",
   secondaryFont: "#82919D",
-
-  // Add more colors as needed!
+  tertiary: "rgba(238,232,255,0.4)",
 };

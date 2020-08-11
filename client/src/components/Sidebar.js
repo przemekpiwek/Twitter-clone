@@ -38,6 +38,9 @@ function Sidebar() {
           <SidebarText>Bookmarks</SidebarText>
         </span>
       </SidebarLink>
+      <div style={{ display: "flex", justifyContent: "flex-start" }}>
+        <MeowButton>Meow</MeowButton>
+      </div>
     </SidebarDiv>
   );
 }
@@ -48,7 +51,7 @@ const SidebarDiv = styled.div`
   margin: 0;
   width: 275px;
   height: 100vh;
-  padding: 10px;
+  padding: 10px 30px;
   border: 1px solid rgb(230, 236, 240);
 `;
 const Catlogo = styled.img`
@@ -86,4 +89,24 @@ const SidebarText = styled.span`
   line-height: 25px;
   font-weight: bold;
   margin-left: 20px;
+`;
+
+const MeowButton = styled.button`
+  display: flex;
+  background: ${COLORS.primary};
+  color: white;
+  border-radius: 50px;
+  padding: 10px;
+  border: 0px;
+  outline: none;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `;
