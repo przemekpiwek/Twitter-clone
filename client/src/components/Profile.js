@@ -1,10 +1,12 @@
 import React from "react";
-import ProfileFeed from "./ProfileFeed";
+import ProfileTweetFeed from "./ProfileTweetFeed";
 import Sidebar from "./Sidebar";
 import ProfileHeader from "./ProfileHeader";
 import styled from "styled-components";
 
 const Profile = ({ currentUser, status }) => {
+  const [tab, setTab] = React.useState("Tweets");
+
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -17,7 +19,7 @@ const Profile = ({ currentUser, status }) => {
           }}
         >
           <ProfileHeader currentUser={currentUser} status={status} />
-          <ProfileFeed />
+          <ProfileTweetFeed />
         </div>
       </div>
     </>

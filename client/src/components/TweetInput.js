@@ -26,8 +26,27 @@ function TweetInput({ currentUser, setAddedTweet }) {
 
     window.addEventListener("keydown", submitHandler);
     console.log("effect");
-    return () => window.removeEventListener("keydown", submitHandler);
+    return () => {
+      window.removeEventListener("keydown", submitHandler);
+    };
   }, [tweetValue]);
+
+  const clickHandler = async (e) => {
+    if (tweetValue.length >= 0) {
+      const response = await fetch("/api/tweet", {
+        method: "post",
+        body: JSON.stringify({ status: tweetValue }),
+        headers: { "Content-type": "application/json" },
+      });
+      if (response.status === 200) {
+        console.log("success");
+        setAddedTweet(true);
+        setTweetValue("");
+      } else {
+        console.error("fetching error");
+      }
+    }
+  };
 
   return (
     <>
@@ -62,6 +81,7 @@ function TweetInput({ currentUser, setAddedTweet }) {
               {CharacterCount}
             </CharacterCounter>
             <TweetButton
+              onClick={clickHandler}
               disabled={CharacterCount < 0 ? true : false}
               style={{
                 background:
