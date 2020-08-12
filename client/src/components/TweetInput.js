@@ -2,8 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants";
 
-function TweetInput({ currentUser }) {
+function TweetInput({ currentUser, setAddedTweet }) {
   const [CharacterCount, SetCharacterCount] = React.useState("280");
+  const [tweetValue, setTweetValue] = React.useState("");
+
+  React.useEffect(() => {
+    const submitHandler = async (e) => {
+      if (e.keyCode === 13 && tweetValue.length >= 0) {
+        const response = await fetch("/api/tweet", {
+          method: "post",
+          body: JSON.stringify({ status: tweetValue }),
+          headers: { "Content-type": "application/json" },
+        });
+        if (response.status === 200) {
+          console.log("success");
+          setAddedTweet(true);
+          setTweetValue("");
+        } else {
+          console.error("fetching error");
+        }
+      }
+    };
+
+    window.addEventListener("keydown", submitHandler);
+    console.log("effect");
+    return () => window.removeEventListener("keydown", submitHandler);
+  }, [tweetValue]);
 
   return (
     <>
@@ -11,8 +35,11 @@ function TweetInput({ currentUser }) {
         <ProfilePic src={currentUser.profile.avatarSrc} />
         <TextArea
           placeholder="What's Happening?"
-          onKeyDown={(e) => {
+          value={tweetValue}
+          onChange={(e) => {
             SetCharacterCount(Number(280) - Number(`${e.target.value.length}`));
+            setTweetValue(e.target.value);
+            console.log(tweetValue);
           }}
         />
       </div>

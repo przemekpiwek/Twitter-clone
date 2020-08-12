@@ -5,6 +5,8 @@ import Feed from "../components/Feed";
 import TweetInput from "../components/TweetInput";
 
 const Home = ({ currentUser, status }) => {
+  const [addedTweet, setAddedTweet] = React.useState(false);
+
   return (
     <>
       <div style={{ display: "flex" }}>
@@ -12,10 +14,16 @@ const Home = ({ currentUser, status }) => {
         <div style={{ flex: 1 }}>
           <TweetHeader>Home</TweetHeader>
           <TweetSubheader>
-            {currentUser && <TweetInput currentUser={currentUser} />}
+            {currentUser && (
+              <TweetInput
+                currentUser={currentUser}
+                addedTweet={addedTweet}
+                setAddedTweet={setAddedTweet}
+              />
+            )}
           </TweetSubheader>
           {(status = "loading" && <div>Loading</div>)}
-          <Feed />
+          <Feed addedTweet={addedTweet} />
         </div>
       </div>
     </>

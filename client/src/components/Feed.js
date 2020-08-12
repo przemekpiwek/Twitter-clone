@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SmallTweet from "../components/SmallTweet";
 import { COLORS } from "../constants";
 
-function Feed() {
+function Feed({ addedTweet }) {
   const [dataFetched, SetDataFetched] = React.useState(null);
   const [feed, SetFeed] = React.useState([]);
   const [error, SetError] = React.useState("");
@@ -28,7 +28,7 @@ function Feed() {
       }
     };
     fetchData();
-  }, []);
+  }, [addedTweet]);
 
   if (dataFetched != "idle") {
     return <p>loading...</p>;
