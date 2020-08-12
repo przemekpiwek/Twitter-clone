@@ -85,6 +85,7 @@ const TweetAction = styled.div`
 `;
 const TweeterInfoDiv = styled.div`
   display: flex;
+  justify-content: flex-start;
 `;
 const TweetDetailDiv = styled.div`
   display: flex;

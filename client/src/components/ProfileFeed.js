@@ -1,34 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import SmallTweet from "../components/SmallTweet";
-import { COLORS } from "../constants";
+import BigTweet from "./BigTweet";
 
-function Feed({ addedTweet }) {
+function ProfileFeed() {
+  const [feed, setFeed] = React.useState([]);
   const [dataFetched, SetDataFetched] = React.useState(null);
-  const [feed, SetFeed] = React.useState([]);
   const [error, SetError] = React.useState("");
-
   React.useEffect(() => {
     SetDataFetched("loading");
-    const fetchData = async () => {
+    const getFeed = async () => {
       try {
-        const response = await fetch("/api/me/home-feed", {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
+        const response = await fetch("/api/treasurymog/feed", {
+          method: "get",
         });
         const JSONdata = await response.json();
         const feedTweets = Object.values(JSONdata.tweetsById);
-        SetFeed(feedTweets);
+        console.log(feedTweets);
+        setFeed(feedTweets);
         SetDataFetched("idle");
       } catch (err) {
         SetError("Status 404");
       }
     };
-    fetchData();
-  }, [addedTweet]);
-
+    getFeed();
+  }, []);
   if (dataFetched != "idle") {
     return <p>loading...</p>;
   } else if (error == "Status 404") {
@@ -37,7 +32,7 @@ function Feed({ addedTweet }) {
     return (
       <FeedContainer>
         {feed.map((item, index) => (
-          <SmallTweet
+          <BigTweet
             key={index}
             author={item.author}
             date={item.timestamp}
@@ -55,7 +50,7 @@ function Feed({ addedTweet }) {
   }
 }
 
-export default Feed;
+export default ProfileFeed;
 
 const FeedContainer = styled.div`
   display: flex;

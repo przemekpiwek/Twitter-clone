@@ -7,6 +7,12 @@ const SocialBar = ({ isLiked, isRetweeted, numRetweets, numLikes }) => {
   const [liked, setLiked] = React.useState(isLiked);
   const [retweeted, setRetweeted] = React.useState(isRetweeted);
 
+  React.useEffect(() => {
+    //add click listener on heart and retweet,
+    //add eventhandler that does post req to /api/tweet/:tweetId/like
+    //cleanup on event listener
+  }, [liked, retweeted]);
+
   return (
     <SocialBarDiv>
       <IconSpan>
@@ -18,7 +24,7 @@ const SocialBar = ({ isLiked, isRetweeted, numRetweets, numLikes }) => {
         <IconText>{numRetweets}</IconText>
       </IconSpan>
       <IconSpan>
-        <HeartIcon style={{ fill: liked ? "red" : "transparent" }} />
+        <HeartIcon />
         <IconText>{numLikes}</IconText>
       </IconSpan>
       <IconSpan>
