@@ -11,7 +11,7 @@ const Home = ({ currentUser, status }) => {
     <>
       <div style={{ display: "flex" }}>
         <Sidebar />
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, maxWidth: "800px" }}>
           <TweetHeader>Home</TweetHeader>
           <TweetSubheader>
             {currentUser && (
@@ -22,7 +22,7 @@ const Home = ({ currentUser, status }) => {
               />
             )}
           </TweetSubheader>
-          {(status = "loading" && <div>Loading</div>)}
+          {/* {(status = "loading" && <div>Loading</div>)} */}
           <Feed addedTweet={addedTweet} />
         </div>
       </div>
@@ -35,6 +35,7 @@ export default Home;
 const TweetHeader = styled.div`
   height: 53px;
   border-bottom: 1px solid rgb(230, 236, 240);
+  border-right: 1px solid rgb(230, 236, 240);
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -48,4 +49,5 @@ const TweetHeader = styled.div`
 const TweetSubheader = styled.div`
   padding: 5px 15px;
   border-bottom: 1px solid rgb(230, 236, 240);
+  border-right: 1px solid rgb(230, 236, 240);
 `;

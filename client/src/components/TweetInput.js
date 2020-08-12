@@ -31,44 +31,48 @@ function TweetInput({ currentUser, setAddedTweet }) {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
-        <ProfilePic src={currentUser.profile.avatarSrc} />
-        <TextArea
-          placeholder="What's Happening?"
-          value={tweetValue}
-          onChange={(e) => {
-            SetCharacterCount(Number(280) - Number(`${e.target.value.length}`));
-            setTweetValue(e.target.value);
-            console.log(tweetValue);
-          }}
-        />
-      </div>
-      <div style={{ display: "flex" }}>
-        <SocialBar />
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <CharacterCounter
-            style={{
-              color:
-                CharacterCount > 55
-                  ? `${COLORS.secondaryFont}`
-                  : CharacterCount > 0
-                  ? "yellow"
-                  : "red",
+      <div style={{ width: "100%" }}>
+        <div style={{ display: "flex" }}>
+          <ProfilePic src={currentUser.profile.avatarSrc} />
+          <TextArea
+            placeholder="What's Happening?"
+            value={tweetValue}
+            onChange={(e) => {
+              SetCharacterCount(
+                Number(280) - Number(`${e.target.value.length}`)
+              );
+              setTweetValue(e.target.value);
+              console.log(tweetValue);
             }}
-          >
-            {CharacterCount}
-          </CharacterCounter>
-          <TweetButton
-            disabled={CharacterCount < 0 ? true : false}
-            style={{
-              background:
-                CharacterCount < 280
-                  ? `${COLORS.primary}`
-                  : `${COLORS.secondary}`,
-            }}
-          >
-            Meow
-          </TweetButton>
+          />
+        </div>
+        <div style={{ display: "flex", marginBottom: "5px" }}>
+          <SocialBar />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <CharacterCounter
+              style={{
+                color:
+                  CharacterCount > 55
+                    ? `${COLORS.secondaryFont}`
+                    : CharacterCount > 0
+                    ? "yellow"
+                    : "red",
+              }}
+            >
+              {CharacterCount}
+            </CharacterCounter>
+            <TweetButton
+              disabled={CharacterCount < 0 ? true : false}
+              style={{
+                background:
+                  CharacterCount < 280
+                    ? `${COLORS.primary}`
+                    : `${COLORS.secondary}`,
+              }}
+            >
+              Meow
+            </TweetButton>
+          </div>
         </div>
       </div>
     </>

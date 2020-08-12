@@ -50,9 +50,8 @@ export default Sidebar;
 const SidebarDiv = styled.div`
   margin: 0;
   width: 275px;
-  height: 100vh;
   padding: 10px 30px;
-  border: 1px solid rgb(230, 236, 240);
+  border-right: 1px solid rgb(230, 236, 240);
 `;
 const Catlogo = styled.img`
   border-radius: 50%;

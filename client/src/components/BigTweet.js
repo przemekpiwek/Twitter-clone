@@ -3,29 +3,53 @@ import styled from "styled-components";
 import SocialBar from "./SocialBar";
 import { COLORS } from "../constants";
 
-const BigTweet = () => {
+const SmallTweet = ({
+  author,
+  date,
+  status,
+  numLikes,
+  numRetweets,
+  retweetFrom,
+  isLiked,
+  isRetweeted,
+  media,
+}) => {
+  let hasPicture;
+  if (media.length > 0) {
+    hasPicture = true;
+  }
+
   return (
     <TweetContainer>
       <TweetAction>I retweeted some shit</TweetAction>
       <TweetDetailDiv>
-        <TweeterImg />
+        <TweeterImg src={author.avatarSrc} />
         <TweeterInfoDiv>
-          <TweeterName>Name</TweeterName>
-          <TweeterHandle>handle</TweeterHandle>
-          <TweetDate>Date</TweetDate>
+          <TweeterName>{author.displayName}</TweeterName>
+          <TweeterHandle>{author.handle}</TweeterHandle>
+          <TweetDate>{date}</TweetDate>
         </TweeterInfoDiv>
       </TweetDetailDiv>
-      <TweeterTweet>blah blah</TweeterTweet>
-      <TweetImage />
-      <SocialBar />
+      <TweeterTweet>{status}</TweeterTweet>
+      {hasPicture && <TweetImage src={media[0].url} />}
+      <SocialBar
+        isLiked={isLiked}
+        isRetweeted={isRetweeted}
+        numRetweets={numRetweets}
+        numLikes={numLikes}
+      />
     </TweetContainer>
   );
 };
 
-export default BigTweet;
+export default SmallTweet;
 
 const TweetContainer = styled.div`
   padding: 0 15px;
+  cursor: pointer;
+
+&:hover {
+  background: ${COLORS.tertiary};
 `;
 const TweetAction = styled.div`
   display: flex;
@@ -61,10 +85,13 @@ const TweetDate = styled.p`
 `;
 const TweeterTweet = styled.p`
   font-size: 15px;
+  margin-top: 10px;
 `;
 const TweetImage = styled.img`
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  border: 1px solid ${COLORS.secondaryFont};
+  border: 1px solid #fbfbfb;
+  max-width: 600px;
+  margin-top: 10px;
 `;

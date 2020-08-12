@@ -36,6 +36,7 @@ const SocialBarDiv = styled.div`
   justify-content: space-between;
   flex-direction: row;
   max-width: 500px;
+  margin: 10px 0px;
   }
 `;
 

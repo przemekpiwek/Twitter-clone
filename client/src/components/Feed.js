@@ -61,4 +61,5 @@ export default Feed;
 const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
+  border-right: 1px solid rgb(230, 236, 240);
 `;
