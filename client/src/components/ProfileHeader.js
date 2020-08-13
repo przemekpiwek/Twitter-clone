@@ -5,6 +5,7 @@ import { FiArrowLeft, FiMapPin, FiCalendar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 function ProfileHeader({ currentUser, status }) {
+  console.log(currentUser);
   return (
     <div
       style={{
@@ -27,10 +28,10 @@ function ProfileHeader({ currentUser, status }) {
         {currentUser && (
           <>
             <BannerDiv>
-              <Banner src={currentUser.profile.bannerSrc} />
+              <Banner src={currentUser.bannerSrc} />
             </BannerDiv>
             <ProfDiv>
-              <ProfilePic src={currentUser.profile.avatarSrc} />
+              <ProfilePic src={currentUser.avatarSrc} />
               <ProfileInfo>
                 <FollowDiv>
                   <FollowButton>Follow</FollowButton>
@@ -42,41 +43,40 @@ function ProfileHeader({ currentUser, status }) {
                       fontSize: "19px",
                     }}
                   >
-                    {currentUser.profile.displayName}
+                    {currentUser.displayName}
                   </span>
                 </div>
-                <div style={{ marginTop: "5px" }}>
+                <div style={{ marginTop: "10px" }}>
                   <span
                     style={{
                       color: `${COLORS.secondaryFont}`,
                       marginTop: "20px",
                     }}
                   >
-                    {`@${currentUser.profile.handle}`}
+                    <span style={{ display: "flex" }}>
+                      {`@${currentUser.handle}`}
+                      <FollowingTab>Follows You</FollowingTab>
+                    </span>
                   </span>
                 </div>
-                <BioParagraph>{currentUser.profile.bio}</BioParagraph>
+                <BioParagraph>{currentUser.bio}</BioParagraph>
                 <div style={{ display: "flex" }}>
                   <InfoSpan>
                     <FiMapPin style={{ marginRight: "5px" }} />
-                    {currentUser.profile.location}
+                    {currentUser.location}
                   </InfoSpan>
                   <InfoSpan>
                     <FiCalendar style={{ marginRight: "5px" }} />
-                    {currentUser.profile.joined}
+                    {currentUser.joined}
                   </InfoSpan>
                 </div>
                 <div style={{ marginTop: "20px" }}>
                   <span>
-                    <FollowNumSpan>
-                      {currentUser.profile.numFollowing}{" "}
-                    </FollowNumSpan>
+                    <FollowNumSpan>{currentUser.numFollowing} </FollowNumSpan>
                     <FollowTextSpan>Following</FollowTextSpan>
                   </span>
                   <span>
-                    <FollowNumSpan>
-                      {currentUser.profile.numFollowers}{" "}
-                    </FollowNumSpan>
+                    <FollowNumSpan>{currentUser.numFollowers} </FollowNumSpan>
                     <FollowTextSpan>Followers</FollowTextSpan>
                   </span>
                 </div>
@@ -95,6 +95,17 @@ function ProfileHeader({ currentUser, status }) {
 }
 
 export default ProfileHeader;
+
+const FollowingTab = styled.div`
+  background: #e8e9f0;
+  color: ${COLORS.secondaryFont};
+  border-radius: 5px;
+  font-size: 0.7em;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 4px;
+  margin-left: 10px;
+`;
 
 const TweetHeader = styled.div`
   height: 53px;
@@ -219,7 +230,12 @@ const InfoSpan = styled.span`
 
 const ArrowIcon = styled(FiArrowLeft)`
   color: ${COLORS.primary};
-  margin-right: "20px";
+  margin-right: 10px;
+  border-radius: 50%;
+
+  &:hover {
+    background: ${COLORS.secondary};
+  }
 `;
 
 const BioParagraph = styled.p`

@@ -29,7 +29,8 @@ export default Notifications;
 
 const ArrowIcon = styled(FiArrowLeft)`
   color: ${COLORS.primary};
-  margin-right: "20px";
+  margin-right: 10px;
+  border-radius: 50%;
 `;
 
 const TweetHeader = styled.div`

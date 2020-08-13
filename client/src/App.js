@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+} from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import Home from "./components/Home";
 import Notifications from "./components/Notifications";
@@ -79,7 +84,7 @@ function App() {
         <Route path="/tweet/:tweetId">
           <TweetDetails />
         </Route>
-        <Route path="/profile">
+        <Route path="/:profileId">
           <Profile currentUser={currentUser} status={status} />
         </Route>
         <Route path="/">

@@ -2,20 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import BigTweet from "./BigTweet";
 
-function ProfileFeed() {
+function ProfileTweetFeed({ currentUser }) {
   const [feed, setFeed] = React.useState([]);
   const [dataFetched, SetDataFetched] = React.useState(null);
   const [error, SetError] = React.useState("");
+
+  console.log(currentUser.handle);
   React.useEffect(() => {
     SetDataFetched("loading");
     const getFeed = async () => {
       try {
-        const response = await fetch("/api/treasurymog/feed", {
+        const response = await fetch(`/api/${currentUser.handle}/feed`, {
           method: "get",
         });
         const JSONdata = await response.json();
         const feedTweets = Object.values(JSONdata.tweetsById);
-        console.log(feedTweets);
         setFeed(feedTweets);
         SetDataFetched("idle");
       } catch (err) {
@@ -50,7 +51,7 @@ function ProfileFeed() {
   }
 }
 
-export default ProfileFeed;
+export default ProfileTweetFeed;
 
 const FeedContainer = styled.div`
   display: flex;

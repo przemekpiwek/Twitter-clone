@@ -4,6 +4,7 @@ import SocialBar from "./SocialBar";
 import { COLORS } from "../constants";
 import moment from "moment";
 import { FiRepeat } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const SmallTweet = ({
   author,
@@ -40,7 +41,9 @@ const SmallTweet = ({
         </LeftBlock>
         <TweetDetailDiv>
           <TweeterInfoDiv>
-            <TweeterName>{author.displayName}</TweeterName>
+            <StyledLink to={`/${author.handle}`}>
+              <TweeterName>{author.displayName}</TweeterName>
+            </StyledLink>
             <TweeterHandle>@{author.handle}</TweeterHandle>
             <TweetDate>{moment(date).format("DD/MM/YYYY")}</TweetDate>
           </TweeterInfoDiv>
@@ -98,9 +101,19 @@ const TweeterImg = styled.img`
   border-radius: 50%;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: black;
+  }
+`;
+
 const TweeterName = styled.p`
   font-size: 15px;
   font-weight: bold;
+  color: black;
 `;
 const TweeterHandle = styled.p`
   font-size: 15px;

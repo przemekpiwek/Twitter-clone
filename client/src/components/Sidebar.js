@@ -20,7 +20,7 @@ function Sidebar() {
           <SidebarText>Home</SidebarText>
         </span>
       </SidebarLink>
-      <SidebarLink to="/profile">
+      <SidebarLink to="/treasurymog">
         <span>
           <FiUser style={{ width: "27px", height: "27px" }} />
           <SidebarText>Profile</SidebarText>
