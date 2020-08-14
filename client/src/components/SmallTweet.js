@@ -7,6 +7,7 @@ import { FiRepeat } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const SmallTweet = ({
+  id,
   author,
   date,
   status,
@@ -25,8 +26,8 @@ const SmallTweet = ({
   if (retweetFrom != null) {
     isRetweet = true;
   }
-
-  console.log(retweetFrom);
+  console.log("help");
+  console.log(id);
   return (
     <TweetContainer>
       {isRetweet && (
@@ -54,6 +55,7 @@ const SmallTweet = ({
             isRetweeted={isRetweeted}
             numRetweets={numRetweets}
             numLikes={numLikes}
+            id={id}
           />
         </TweetDetailDiv>
       </div>

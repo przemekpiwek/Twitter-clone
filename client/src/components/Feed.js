@@ -39,6 +39,7 @@ function Feed({ addedTweet }) {
         {feed.map((item, index) => (
           <SmallTweet
             key={index}
+            id={item.id}
             author={item.author}
             date={item.timestamp}
             status={item.status}

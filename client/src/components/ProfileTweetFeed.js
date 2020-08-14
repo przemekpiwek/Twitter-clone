@@ -7,7 +7,6 @@ function ProfileTweetFeed({ currentUser }) {
   const [dataFetched, SetDataFetched] = React.useState(null);
   const [error, SetError] = React.useState("");
 
-  console.log(currentUser.handle);
   React.useEffect(() => {
     SetDataFetched("loading");
     const getFeed = async () => {

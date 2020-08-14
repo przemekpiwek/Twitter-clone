@@ -3,15 +3,54 @@ import styled from "styled-components";
 import { FiMessageCircle, FiRepeat, FiHeart, FiUpload } from "react-icons/fi";
 import { COLORS } from "../constants";
 
-const SocialBar = ({ isLiked, isRetweeted, numRetweets, numLikes }) => {
+const SocialBar = ({ id, isLiked, isRetweeted, numRetweets, numLikes }) => {
   const [liked, setLiked] = React.useState(isLiked);
   const [retweeted, setRetweeted] = React.useState(isRetweeted);
+  const [retweets, setRetweets] = React.useState(numRetweets);
+  const [likes, setLikes] = React.useState(numLikes);
 
-  React.useEffect(() => {
-    //add click listener on heart and retweet,
-    //add eventhandler that does post req to /api/tweet/:tweetId/like
-    //cleanup on event listener
-  }, [liked, retweeted]);
+  const RepeatHandler = async () => {
+    try {
+      let bodyReq;
+      bodyReq = retweeted ? { retweet: false } : { retweet: true };
+      const response = await fetch(`/api/tweet/${id}/retweet`, {
+        method: "put",
+        body: JSON.stringify(bodyReq),
+        headers: { "Content-type": "application/json" },
+      });
+      if (response.status == 200) {
+        setRetweeted(!retweeted);
+        if (bodyReq.retweet === false) {
+          setRetweets(retweets - 1);
+        } else {
+          setRetweets(retweets + 1);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const LikeHandler = async () => {
+    try {
+      let bodyReq;
+      bodyReq = liked ? { like: false } : { like: true };
+      const response = await fetch(`/api/tweet/${id}/like`, {
+        method: "put",
+        body: JSON.stringify(bodyReq),
+        headers: { "Content-type": "application/json" },
+      });
+      if (response.status == 200) {
+        setLiked(!liked);
+        if (bodyReq.like === false) {
+          setLikes(likes - 1);
+        } else {
+          setLikes(likes + 1);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <SocialBarDiv>
@@ -20,12 +59,35 @@ const SocialBar = ({ isLiked, isRetweeted, numRetweets, numLikes }) => {
         <IconText></IconText>
       </IconSpan>
       <IconSpan>
-        <RepeatIcon />
-        <IconText>{numRetweets}</IconText>
+        <RepeatIcon
+          onClick={RepeatHandler}
+          style={{
+            stroke: retweeted ? `${COLORS.primary}` : `${COLORS.secondaryFont}`,
+          }}
+        />
+        <IconText
+          style={{
+            color: retweeted ? `${COLORS.primary}` : `${COLORS.secondaryFont}`,
+          }}
+        >
+          {retweets}
+        </IconText>
       </IconSpan>
       <IconSpan>
-        <HeartIcon />
-        <IconText>{numLikes}</IconText>
+        <HeartIcon
+          onClick={LikeHandler}
+          style={{
+            fill: liked ? "red" : "transparent",
+            stroke: liked ? "red" : `${COLORS.secondaryFont}`,
+          }}
+        />
+        <IconText
+          style={{
+            color: liked ? "red" : `${COLORS.secondaryFont}`,
+          }}
+        >
+          {likes}
+        </IconText>
       </IconSpan>
       <IconSpan>
         <UploadIcon />

@@ -5,7 +5,6 @@ import { FiArrowLeft, FiMapPin, FiCalendar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 function ProfileHeader({ currentUser, status }) {
-  console.log(currentUser);
   return (
     <div
       style={{

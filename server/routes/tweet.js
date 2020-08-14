@@ -69,9 +69,9 @@ router.post("/api/tweet", (req, res) => {
  */
 router.put("/api/tweet/:tweetId/like", (req, res) => {
   const { like } = req.body;
-
+  console.log(like);
   const tweet = data.tweets[req.params.tweetId];
-
+  console.log(tweet);
   if (!tweet) {
     res.sendStatus(404);
     return;
