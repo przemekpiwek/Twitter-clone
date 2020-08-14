@@ -3,31 +3,44 @@ import Sidebar from "./Sidebar";
 import styled from "styled-components";
 import Feed from "../components/Feed";
 import TweetInput from "../components/TweetInput";
+import errorMessage from "../components/errorMessage";
 
-const Home = ({ currentUser, status }) => {
+const Home = ({ currentUser, status, error }) => {
   const [addedTweet, setAddedTweet] = React.useState(false);
 
-  return (
-    <>
-      <div style={{ display: "flex" }}>
-        <Sidebar />
-        <div style={{ flex: 1, maxWidth: "800px" }}>
-          <TweetHeader>Home</TweetHeader>
-          <TweetSubheader>
-            {currentUser && (
-              <TweetInput
-                currentUser={currentUser}
-                addedTweet={addedTweet}
-                setAddedTweet={setAddedTweet}
-              />
-            )}
-          </TweetSubheader>
-          {/* {(status = "loading" && <div>Loading</div>)} */}
-          <Feed addedTweet={addedTweet} />
+  if (error == "Status 404") {
+    return (
+      <>
+        <div style={{ display: "flex" }}>
+          <Sidebar />
+          <div style={{ flex: 1, maxWidth: "800px" }}>
+            <errorMessage />
+          </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div style={{ display: "flex" }}>
+          <Sidebar />
+          <div style={{ flex: 1, maxWidth: "800px" }}>
+            <TweetHeader>Home</TweetHeader>
+            <TweetSubheader>
+              {currentUser && (
+                <TweetInput
+                  currentUser={currentUser}
+                  addedTweet={addedTweet}
+                  setAddedTweet={setAddedTweet}
+                />
+              )}
+            </TweetSubheader>
+            <Feed addedTweet={addedTweet} />
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Home;

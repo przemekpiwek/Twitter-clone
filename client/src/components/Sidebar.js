@@ -10,10 +10,12 @@ import catLogo from "../assets/logo.svg";
 function Sidebar() {
   return (
     <SidebarDiv>
-      <Catlogo
-        src={catLogo}
-        style={{ width: "50px", height: "50px", padding: "10px" }}
-      />
+      <SidebarLink to="/">
+        <Catlogo
+          src={catLogo}
+          style={{ width: "50px", height: "50px", padding: "10px" }}
+        />
+      </SidebarLink>
       <SidebarLink to="/">
         <span>
           <FiHome style={{ width: "27px", height: "27px" }} />

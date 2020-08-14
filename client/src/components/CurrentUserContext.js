@@ -5,6 +5,7 @@ export const CurrentUserContext = React.createContext(null);
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = React.useState(null);
   const [status, setStatus] = React.useState("idle");
+  const [error, setError] = React.useState(null);
 
   const fetchData = async () => {
     setStatus("loading");
@@ -19,6 +20,7 @@ export const CurrentUserProvider = ({ children }) => {
       setCurrentUser(responseJSON);
       setStatus("idle");
     } catch (error) {
+      setError("Status 404");
       setStatus("idle");
     }
   };
@@ -28,7 +30,7 @@ export const CurrentUserProvider = ({ children }) => {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, status }}>
+    <CurrentUserContext.Provider value={{ currentUser, status, error }}>
       {children}
     </CurrentUserContext.Provider>
   );

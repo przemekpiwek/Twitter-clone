@@ -25,7 +25,6 @@ function TweetInput({ currentUser, setAddedTweet }) {
     };
 
     window.addEventListener("keydown", submitHandler);
-    console.log("effect");
     return () => {
       window.removeEventListener("keydown", submitHandler);
     };

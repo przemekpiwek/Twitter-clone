@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SmallTweet from "../components/SmallTweet";
 import { COLORS } from "../constants";
+import { Link } from "react-router-dom";
 
 function Feed({ addedTweet }) {
   const [dataFetched, SetDataFetched] = React.useState(null);
@@ -37,19 +38,20 @@ function Feed({ addedTweet }) {
     return (
       <FeedContainer>
         {feed.map((item, index) => (
-          <SmallTweet
-            key={index}
-            id={item.id}
-            author={item.author}
-            date={item.timestamp}
-            status={item.status}
-            numLikes={item.numLikes}
-            numRetweets={item.numRetweets}
-            retweetFrom={item.retweetFrom}
-            isLiked={item.isLiked}
-            isRetweeted={item.isRetweeted}
-            media={item.media}
-          />
+          <StyledLink key={index} to={`/tweet/${item.id}`}>
+            <SmallTweet
+              id={item.id}
+              author={item.author}
+              date={item.timestamp}
+              status={item.status}
+              numLikes={item.numLikes}
+              numRetweets={item.numRetweets}
+              retweetFrom={item.retweetFrom}
+              isLiked={item.isLiked}
+              isRetweeted={item.isRetweeted}
+              media={item.media}
+            />
+          </StyledLink>
         ))}
       </FeedContainer>
     );
@@ -62,4 +64,9 @@ const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgb(230, 236, 240);
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;

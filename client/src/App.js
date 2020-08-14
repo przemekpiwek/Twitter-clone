@@ -69,7 +69,7 @@ body, textarea{
 `;
 
 function App() {
-  const { currentUser, status } = React.useContext(CurrentUserContext);
+  const { currentUser, status, error } = React.useContext(CurrentUserContext);
 
   return (
     <Router>
@@ -85,10 +85,10 @@ function App() {
           <TweetDetails />
         </Route>
         <Route path="/:profileId">
-          <Profile currentUser={currentUser} status={status} />
+          <Profile currentUser={currentUser} status={status} error={error} />
         </Route>
         <Route path="/">
-          <Home currentUser={currentUser} status={status} />
+          <Home currentUser={currentUser} status={status} error={error} />
         </Route>
       </Switch>
     </Router>

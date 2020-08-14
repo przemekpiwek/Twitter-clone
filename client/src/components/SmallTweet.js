@@ -26,8 +26,6 @@ const SmallTweet = ({
   if (retweetFrom != null) {
     isRetweet = true;
   }
-  console.log("help");
-  console.log(id);
   return (
     <TweetContainer>
       {isRetweet && (
