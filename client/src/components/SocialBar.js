@@ -9,7 +9,8 @@ const SocialBar = ({ id, isLiked, isRetweeted, numRetweets, numLikes }) => {
   const [retweets, setRetweets] = React.useState(numRetweets);
   const [likes, setLikes] = React.useState(numLikes);
 
-  const RepeatHandler = async () => {
+  const RepeatHandler = async (ev) => {
+    ev.stopPropagation();
     try {
       let bodyReq;
       bodyReq = retweeted ? { retweet: false } : { retweet: true };
@@ -30,7 +31,8 @@ const SocialBar = ({ id, isLiked, isRetweeted, numRetweets, numLikes }) => {
       console.error(err);
     }
   };
-  const LikeHandler = async () => {
+  const LikeHandler = async (ev) => {
+    ev.stopPropagation();
     try {
       let bodyReq;
       bodyReq = liked ? { like: false } : { like: true };
@@ -51,11 +53,14 @@ const SocialBar = ({ id, isLiked, isRetweeted, numRetweets, numLikes }) => {
       console.error(err);
     }
   };
+  const OtherHandler = async (ev) => {
+    ev.stopPropagation();
+  };
 
   return (
     <SocialBarDiv>
       <IconSpan>
-        <ChatIcon />
+        <ChatIcon onClick={OtherHandler} />
         <IconText></IconText>
       </IconSpan>
       <IconSpan>
@@ -90,7 +95,7 @@ const SocialBar = ({ id, isLiked, isRetweeted, numRetweets, numLikes }) => {
         </IconText>
       </IconSpan>
       <IconSpan>
-        <UploadIcon />
+        <UploadIcon onClick={OtherHandler} />
         <IconText></IconText>
       </IconSpan>
     </SocialBarDiv>
@@ -103,9 +108,9 @@ const SocialBarDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  width: 100%;
   max-width: 500px;
   margin: 10px 0px;
-  }
 `;
 
 const ChatIcon = styled(FiMessageCircle)`

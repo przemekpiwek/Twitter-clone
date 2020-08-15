@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import SmallTweet from "../components/SmallTweet";
-import { COLORS } from "../constants";
 import { Link } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage";
 
 function Feed({ addedTweet }) {
   const [dataFetched, SetDataFetched] = React.useState(null);
@@ -20,7 +20,7 @@ function Feed({ addedTweet }) {
           },
         });
         const JSONdata = await response.json();
-        const feedTweets = Object.values(JSONdata.tweetsById);
+        const feedTweets = Object.values(JSONdata.tweetsById).reverse();
         SetFeed(feedTweets);
         SetDataFetched("idle");
       } catch (err) {
@@ -33,25 +33,24 @@ function Feed({ addedTweet }) {
   if (dataFetched != "idle") {
     return <p>loading...</p>;
   } else if (error == "Status 404") {
-    return <p>There was an error retrieving the data.</p>;
+    return <ErrorMessage />;
   } else {
     return (
       <FeedContainer>
         {feed.map((item, index) => (
-          <StyledLink key={index} to={`/tweet/${item.id}`}>
-            <SmallTweet
-              id={item.id}
-              author={item.author}
-              date={item.timestamp}
-              status={item.status}
-              numLikes={item.numLikes}
-              numRetweets={item.numRetweets}
-              retweetFrom={item.retweetFrom}
-              isLiked={item.isLiked}
-              isRetweeted={item.isRetweeted}
-              media={item.media}
-            />
-          </StyledLink>
+          <SmallTweet
+            key={index}
+            id={item.id}
+            author={item.author}
+            date={item.timestamp}
+            status={item.status}
+            numLikes={item.numLikes}
+            numRetweets={item.numRetweets}
+            retweetFrom={item.retweetFrom}
+            isLiked={item.isLiked}
+            isRetweeted={item.isRetweeted}
+            media={item.media}
+          />
         ))}
       </FeedContainer>
     );

@@ -1,6 +1,8 @@
 import React from "react";
+import { Icon } from "react-icons-kit";
+import { u1F4A3 } from "react-icons-kit/noto_emoji_regular/u1F4A3";
 
-function errorMessage() {
+function ErrorMessage() {
   return (
     <div
       style={{
@@ -9,7 +11,10 @@ function errorMessage() {
         alignItems: "center",
       }}
     >
-      <h1>An unknown error has occured.</h1>
+      <Icon icon={u1F4A3} />
+      <h1>
+        An unknown error has occured. <br />
+      </h1>
       <h3>
         Please try refreshing the page, or contact support if problem persists
       </h3>
@@ -17,4 +22,4 @@ function errorMessage() {
   );
 }
 
-export default errorMessage;
+export default ErrorMessage;

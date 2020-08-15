@@ -4,7 +4,7 @@ import SocialBar from "./SocialBar";
 import { COLORS } from "../constants";
 import moment from "moment";
 import { FiRepeat } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const SmallTweet = ({
   id,
@@ -20,14 +20,29 @@ const SmallTweet = ({
 }) => {
   let hasPicture;
   let isRetweet;
+
   if (media.length > 0) {
     hasPicture = true;
   }
   if (retweetFrom != null) {
     isRetweet = true;
   }
+
+  let history = useHistory();
+
+  const profileHandler = (ev) => {
+    ev.persist();
+    ev.stopPropagation();
+    history.push(`/${author.handle}`);
+  };
+
+  const clickHandler = (ev) => {
+    ev.persist();
+    history.push(`/tweet/${id}`);
+  };
+
   return (
-    <TweetContainer>
+    <TweetContainer onClick={clickHandler} tabindex="0">
       {isRetweet && (
         <TweetAction>
           <FiRepeat style={{ marginRight: "10px" }} />
@@ -40,9 +55,10 @@ const SmallTweet = ({
         </LeftBlock>
         <TweetDetailDiv>
           <TweeterInfoDiv>
-            <StyledLink to={`/${author.handle}`}>
-              <TweeterName>{author.displayName}</TweeterName>
-            </StyledLink>
+            {/* <StyledLink to={`/${author.handle}`}> */}
+            <TweeterName onClick={profileHandler} tabindex="1">
+              {author.displayName}
+            </TweeterName>
             <TweeterHandle>@{author.handle}</TweeterHandle>
             <TweetDate>{moment(date).format("DD/MM/YYYY")}</TweetDate>
           </TweeterInfoDiv>
@@ -94,6 +110,7 @@ const TweetDetailDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex-grow: 1;
 `;
 const TweeterImg = styled.img`
   height: 49px;
@@ -101,19 +118,14 @@ const TweeterImg = styled.img`
   border-radius: 50%;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    color: black;
-  }
-`;
-
 const TweeterName = styled.p`
   font-size: 15px;
   font-weight: bold;
   color: black;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 const TweeterHandle = styled.p`
   font-size: 15px;

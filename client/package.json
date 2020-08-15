@@ -35,5 +35,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:31415"
+  "proxy": "http://localhost:31415",
+  "devDependencies": {
+    "react-icons-kit": "^1.3.1"
+  }
 }

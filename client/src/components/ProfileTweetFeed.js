@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BigTweet from "./BigTweet";
+import ErrorMessage from "./ErrorMessage";
 
 function ProfileTweetFeed({ currentUser }) {
   const [feed, setFeed] = React.useState([]);
@@ -27,7 +28,7 @@ function ProfileTweetFeed({ currentUser }) {
   if (dataFetched != "idle") {
     return <p>loading...</p>;
   } else if (error == "Status 404") {
-    return <p>There was an error retrieving the data.</p>;
+    return <ErrorMessage />;
   } else {
     return (
       <FeedContainer>

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 const Profile = ({ currentUser, status }) => {
-  const [tab, setTab] = React.useState("Tweets");
+  const [TweetsTabActive, SetTweetsTabActive] = React.useState(true);
   const [fetchedProfile, setFetchedProfile] = React.useState([]);
   const [isProfileFetched, setIsProfileFetched] = React.useState(false);
 
@@ -37,7 +37,12 @@ const Profile = ({ currentUser, status }) => {
         >
           {isProfileFetched && (
             <>
-              <ProfileHeader currentUser={fetchedProfile} status={status} />
+              <ProfileHeader
+                currentUser={fetchedProfile}
+                status={status}
+                TweetsTabActive={TweetsTabActive}
+                SetTweetsTabActive={SetTweetsTabActive}
+              />
               <ProfileTweetFeed currentUser={fetchedProfile} />
             </>
           )}

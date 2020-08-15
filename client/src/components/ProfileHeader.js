@@ -4,7 +4,16 @@ import { COLORS } from "../constants";
 import { FiArrowLeft, FiMapPin, FiCalendar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-function ProfileHeader({ currentUser, status }) {
+function ProfileHeader({
+  currentUser,
+  status,
+  TweetsTabActive,
+  SetTweetsTabActive,
+}) {
+  const [following, SetFollowing] = React.useState(
+    currentUser.isBeingFollowedByYou
+  );
+
   return (
     <div
       style={{
@@ -33,7 +42,13 @@ function ProfileHeader({ currentUser, status }) {
               <ProfilePic src={currentUser.avatarSrc} />
               <ProfileInfo>
                 <FollowDiv>
-                  <FollowButton>Follow</FollowButton>
+                  <FollowButton
+                    style={{
+                      background: following ? `${COLORS.secondary}` : "white",
+                    }}
+                    children={following ? "Following" : "Follow"}
+                    onClick={() => SetFollowing(!following)}
+                  ></FollowButton>
                 </FollowDiv>
                 <div>
                   <span
@@ -81,7 +96,18 @@ function ProfileHeader({ currentUser, status }) {
                 </div>
               </ProfileInfo>
               <TabBar>
-                <Tab>Tweets</Tab>
+                <Tab
+                  style={{
+                    background: TweetsTabActive
+                      ? `${COLORS.secondary}`
+                      : "white",
+                    borderBottom: TweetsTabActive
+                      ? `2px solid ${COLORS.primary}`
+                      : "0px",
+                  }}
+                >
+                  Tweets
+                </Tab>
                 <Tab>Media</Tab>
                 <Tab>Likes</Tab>
               </TabBar>
@@ -178,6 +204,12 @@ const FollowButton = styled.button`
     cursor: pointer;
     background: ${COLORS.secondary};
   }
+  &:active {
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const TabBar = styled.div`
@@ -190,9 +222,10 @@ const Tab = styled.button`
   text-align: center;
   font-weight: 800;
   color: ${COLORS.secondaryFont};
-  padding: 20px 0;
   background: white;
+  padding: 20px 0;
   border: 0px;
+  outline: none;
 
   &:focus {
     outline: none;

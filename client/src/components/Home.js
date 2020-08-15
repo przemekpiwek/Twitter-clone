@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import styled from "styled-components";
 import Feed from "../components/Feed";
 import TweetInput from "../components/TweetInput";
-import errorMessage from "../components/errorMessage";
+import ErrorMessage from "./ErrorMessage";
 
 const Home = ({ currentUser, status, error }) => {
   const [addedTweet, setAddedTweet] = React.useState(false);
@@ -11,10 +11,16 @@ const Home = ({ currentUser, status, error }) => {
   if (error == "Status 404") {
     return (
       <>
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Sidebar />
           <div style={{ flex: 1, maxWidth: "800px" }}>
-            <errorMessage />
+            <ErrorMessage />
           </div>
         </div>
       </>
